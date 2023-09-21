@@ -145,7 +145,7 @@ div.buttons{
 
 
 .nav {
-    background-color: #333;  
+    background-color: #20004f;  
     overflow: hidden;  
     padding: 10px 20px;  
 }
@@ -219,7 +219,7 @@ button:hover{
 
 div.footer{
     font-size: 30px;
-    background-color: #333;
+    background-color: #20004f;
     text-align: center;
     color: white;
     padding: 20px;
