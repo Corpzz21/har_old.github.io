@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>H'Otel Booking</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="C:\Users\LENOVO\OneDrive\Documents\GitHub\har_old.github.io\CPE143L_SA1_David\studentDesign.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+        <body class="body1">
+            <div class="nav">
+                <a href="#" class="logo"><i class='bx bxs-hotel' ></i>H'Otel</a>
+                <a href="#rooms" class="room">Rooms</a>
+                <a href="Login.html" class="logout" style="float: right;">Logout</a>
+            </div>
+
+            <header class="header" style="max-width:1500px;">
+                <div class="container">
+                    <img src="pics/hotel2.jpg" alt="The Hotel" style="min-width:1000px" class="backgroundImage">
+                    
+                    <div class="formOver">
+                        <div class="barupperForm">
+                            <h2><i class='bx bxs-hotel' ></i>H'Otel</h2>
+                        </div>
+
+                        <div class="divForm">
+                            <form class="form">
+                                <div class="inputFields">
+                                    <div class="input-box">
+                                        <input type="text" class="name" placeholder="Name" required>
+                                    </div>
+
+                                    <div class="input-box">
+                                        <input type="email" class="email" placeholder="Email" required>
+                                    </div>
+
+                                    <div class="input-box">
+                                        <input type="number" class="family" min="1" placeholder="No. in the Family(P100 per person)" required>
+                                    </div>
+                                </div>
+
+                                <div class="dates">
+                                    <div class="input-date">
+                                        <label>Check In</label></br>
+                                        <input type="date" class="checkIn" id="date1" required>
+                                    </div>
+                                    
+                                    <div class="input-date">
+                                        <label>Check Out</label></br>
+                                        <input type="date" class="checkOut" id="date2" required>
+                                    </div>
+                                    
+                                </div></br></br>
+
+                                <div class="transaction">
+                                    <div class="total">
+                                        <label class="total">Total Price: </label><p id="price"></p>
+                                    </div></br>
+
+                                    <div class="pay">
+                                        <input type="number" class="payment" id="payment" min="0" placeholder="In PHP">
+                                    </div></br>
+                                </div>
+
+                                <div class="buttons">
+                                    <button type="button" class="btn" onclick="chooseRoom()">Choose a Room</button>
+                                    <button type="submit" class="sbmt" onclick="return handleBooking()">Book</button>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content">
+
+                <div class="top" id="rooms">
+                    <h3>Rooms</h3>
+                    <p>Please Choose the Type of Room of your Choice.</p>
+                </div></br>
+
+                <div class="roomChoice">
+                    <div class="imageContainer">
+                        <img src="pics/room1.jpg">
+                        <div class="roomInfo">
+                            <h3>Single Room</h3>
+                            <h6 class="priceOpacity">From P1000</h6>
+                            <p>Single bed</p>
+                            <p class="icons1"><i class='bx bxs-bath' ></i> <i class='bx bxs-phone' ></i> <i class='bx bx-wifi' ></i></p>
+                            <button type="button" class="bookBtn" value="1000" onclick="book(event)">Choose Room</button>
+                        </div>
+                    </div>
+
+                    <div class="imageContainer">
+                        <img src="pics/room2.jpg">
+                        <div class="roomInfo">
+                            <h3>Double Room</h3>
+                            <h6 class="priceOpacity">From P2500</h6>
+                            <p>Single bed</p>
+                            <p class="icons1"><i class='bx bxs-bath' ></i> <i class='bx bxs-phone' ></i> <i class='bx bx-wifi' ></i> <i class='bx bx-tv' ></i></p>
+                            <button type="button" class="bookBtn" value="2500" onclick="book(event)">Choose Room</button>
+                        </div>
+                    </div>
+
+                    <div class="imageContainer">
+                        <img src="pics/room3.jpg">
+                        <div class="roomInfo">
+                            <h3>Deluxe Room</h3>
+                            <h6 class="priceOpacity">From P5000</h6>
+                            <p>King-size bed</p>
+                            <p class="icons1"><i class='bx bxs-bath' ></i> <i class='bx bxs-phone' ></i> <i class='bx bx-wifi' ></i> <i class='bx bx-tv' > <i class='bx bxs-drink' ></i> <i class='bx bx-fork' ></i><i class='bx bx-knife' ></i></i></p>
+                            <button type="button" class="bookBtn" value="5000" onclick="book(event)">Choose Room</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div></br>
+
+            <div class="footer">
+                <section><br>
+                <p class="lab">Follow us on</p>
+                <p class="cpe"><i class='bx bxl-facebook-circle'></i> <i class='bx bxl-instagram-alt' ></i> <i class='bx bxl-twitter' ></i> </p><br>
+                </section>
+            </div>
+
+
+            <script> /*Date modifier*/
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.getElementById('date1').addEventListener('change', function() {
+                        let date1Value = this.value;
+                        let dateObj = new Date(date1Value);
+
+                        dateObj.setDate(dateObj.getDate() + 1);
+                        let nextDay = dateObj.toISOString().split('T')[0];
+                        document.getElementById('date2').setAttribute('min', nextDay    );
+                    });
+                });
+
+                function chooseRoom(){
+                    var target = document.querySelector('.roomChoice');
+                    if(target){
+                        target.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+                    }
+                }
+
+                function book(event){
+                    const nameField = document.querySelector('.name').value;
+                    const emailField = document.querySelector('.email').value;
+                    const familyField = document.querySelector('.family').value;
+                    const date1 = document.getElementById('date1').value;
+                    const date2 = document.getElementById('date2').value;
+
+                    if(!nameField || !emailField || !familyField || !date1 || !date2){
+                        alert("Please fill out all the fields (Name, Email, Family Members, Check-in and Check-out dates) before choosing a room.");
+                        return;
+                    }
+
+                    
+                    const dateObj1 = new Date(date1);
+                    const dateObj2 = new Date(date2);
+
+                    const diffInTime = dateObj2 - dateObj1;
+                    const diffInDays = diffInTime / (1000 * 60 * 60 * 24);
+
+                    const familyMembers = parseInt(familyField);
+                    const familyCharge = familyMembers * 100;
+
+                    let pricePerDay = parseInt(event.target.value);
+                    let total = (diffInDays * pricePerDay) + (diffInDays * familyCharge); 
+
+                    document.getElementById('price').textContent = `P${total}`;
+
+                    var target = document.querySelector('.container');
+                    if(target){
+                        target.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+                    }
+                }
+
+                function handleBooking(){
+                    const nameField = document.querySelector('.name').value;
+                    const emailField = document.querySelector('.email').value;
+                    const familyField = document.querySelector('.family').value;
+                    const date1 = document.getElementById('date1').value;
+                    const date2 = document.getElementById('date2').value;
+
+                    if(!nameField || !emailField || !familyField || !date1 || !date2){
+                        alert("Please fill out all the fields (Name, Email, Family Members, Check-in and Check-out dates) before choosing a room.");
+                        return;
+                    }
+
+                    let totalPrice = parseFloat(document.getElementById('price').textContent.slice(1));
+                    
+                    if(isNaN(totalPrice)){
+                        alert('Please choose a room first before booking.');
+                        return false;
+                    }
+
+                    let payment = parseFloat(document.getElementById('payment').value);
+
+                    if(payment >= totalPrice) {
+                        let change = payment - totalPrice;
+                        alert(`Booking successful! Your change is P${change.toFixed(2)}.`);
+                        return true;
+                    } else{
+                        alert('Insufficient payment. Please enter an amount greater than or equal to the total price.');
+                        return false;
+                    }
+                }
+            </script>
+
+
+        </body>
+</html>
+
