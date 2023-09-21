@@ -224,3 +224,8 @@ div.footer{
     color: white;
     padding: 20px;
 }
+
+.footer i:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
